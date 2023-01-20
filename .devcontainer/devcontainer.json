@@ -10,13 +10,16 @@
 		"ghcr.io/devcontainers-contrib/features/angular-cli:2": {}
 	},
 	"portsAttributes": {
+		"3000": {
+			"label": "clientes-json-server"
+		},
 		"4200": {
 			"label": "clientes-frontend"
 		}
-	}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	"forwardPorts": [3000, 4200]
 
 	// Configure tool-specific properties.
 	// "customizations": {},

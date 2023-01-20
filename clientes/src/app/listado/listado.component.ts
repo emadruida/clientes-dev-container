@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../cliente';
 import { ClienteService } from '../cliente.service';
-import { CLIENTES } from '../mock-clientes';
 
 @Component({
   selector: 'app-listado',
@@ -11,7 +10,7 @@ import { CLIENTES } from '../mock-clientes';
 export class ListadoComponent implements OnInit {
   clientes!: Cliente[];
 
-  constructor(private clienteService: ClienteService) {}
+  constructor(private clienteService: ClienteService) { }
 
   ngOnInit(): void {
     this.getClientes();

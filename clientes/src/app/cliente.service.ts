@@ -1,39 +1,34 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Cliente } from './cliente';
-import { CLIENTES } from './mock-clientes';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClienteService {
-  constructor() {}
+
+  URL = 'http://localhost:3000/clientes/';
+
+  constructor(private http: HttpClient) { }
 
   getClientes(): Observable<Cliente[]> {
-    return of(CLIENTES);
+    return this.http.get<Cliente[]>(this.URL);
   }
 
   getCliente(id: number): Observable<Cliente | undefined> {
-    return of(CLIENTES.find((c) => c.id === id));
+    return this.http.get<Cliente>(this.URL + id);
   }
 
   modificarCliente(cliente: Cliente): Observable<Cliente> {
-    const idx = CLIENTES.findIndex((c) => c.id === cliente.id);
-    CLIENTES[idx] = cliente;
-    return of(cliente);
+    return this.http.put<Cliente>(this.URL + cliente.id, cliente);
   }
 
   nuevoCliente(cliente: Cliente): Observable<Cliente> {
-    cliente.id = CLIENTES.length > 0 ? Math.max(...CLIENTES.map((c) => c.id)) + 1 : 1;
-    CLIENTES.push(cliente);
-    return of(cliente);
+    return this.http.post<Cliente>(this.URL, cliente);
   }
 
   borrarCliente(id: number): Observable<any> {
-    const idx = CLIENTES.findIndex((c) => c.id == id);
-    if (idx >= 0) {
-      CLIENTES.splice(idx, 1);
-    }
-    return of({});
+    return this.http.delete(this.URL + id);
   }
 }

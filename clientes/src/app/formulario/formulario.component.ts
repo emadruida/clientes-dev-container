@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cliente } from '../cliente';
 import { ClienteService } from '../cliente.service';
-import { CLIENTES } from '../mock-clientes';
 
 @Component({
   selector: 'app-formulario',
