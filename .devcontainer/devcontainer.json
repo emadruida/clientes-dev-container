@@ -4,10 +4,14 @@
 	"name": "Debian",
 	"onCreateCommand": "",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+	//"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/angular-cli:2": {}
+		"ghcr.io/devcontainers-contrib/features/angular-cli:2": {},
+		"ghcr.io/devcontainers-contrib/features/npm-package:1": {
+			"package" : "json-server"
+		}
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
