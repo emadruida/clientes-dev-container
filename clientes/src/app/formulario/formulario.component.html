@@ -1,25 +1,25 @@
 <div>
     <div>
         <label for="id">Id</label>
-        <input type="text" name="id" id="id" readonly>
+        <input type="text" name="id" id="id" readonly [(ngModel)]="cliente.id">
     </div>
     <div>
         <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" id="nombre">
+        <input type="text" name="nombre" id="nombre" [(ngModel)]="cliente.nombre">
     </div>
     <div>
         <label for="apellidos">Apellidos</label>
-        <input type="text" name="apellidos" id="apellidos">
+        <input type="text" name="apellidos" id="apellidos" [(ngModel)]="cliente.apellidos">
     </div>
     <div>
         <label for="telefono">Teléfono</label>
-        <input type="text" name="telefono" id="telefono">
+        <input type="tel" name="telefono" id="telefono" [(ngModel)]="cliente.telefono">
     </div>
     <div>
         <label for="email">Email</label>
-        <input type="text" name="email" id="email">
+        <input type="email" name="email" id="email" [(ngModel)]="cliente.email">
     </div>
     <div>
-        <button>Guardar</button>
+        <button (click)="guardar()">Guardar</button>
     </div>
 </div>
