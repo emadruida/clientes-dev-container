@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cliente } from '../cliente';
+import { ClienteService } from '../cliente.service';
 import { CLIENTES } from '../mock-clientes';
 
 @Component({
@@ -12,7 +13,11 @@ import { CLIENTES } from '../mock-clientes';
 export class FormularioComponent implements OnInit {
   cliente: Cliente = {} as Cliente;
 
-  constructor(private route: ActivatedRoute, private location: Location) { }
+  constructor(
+    private clienteService: ClienteService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
     const id: string | null = this.route.snapshot.paramMap.get('id');
@@ -22,20 +27,16 @@ export class FormularioComponent implements OnInit {
   }
 
   getCliente(id: number): void {
-    const found = CLIENTES.find((c) => c.id === id);
-    if (found) {
-      this.cliente = found;
-    }
+    this.clienteService
+      .getCliente(id)
+      .subscribe((c) => (this.cliente = c ? c : ({} as Cliente)));
   }
 
   guardar(): void {
     if (this.cliente.id) {
-      const idx = CLIENTES.findIndex((c) => c.id === this.cliente.id);
-      CLIENTES[idx] = this.cliente;
+      this.clienteService.modificarCliente(this.cliente).subscribe(() => this.location.back());
     } else {
-      this.cliente.id = CLIENTES.length > 0 ? Math.max(...CLIENTES.map((c) => c.id)) + 1 : 1;
-      CLIENTES.push(this.cliente);
+      this.clienteService.nuevoCliente(this.cliente).subscribe(() => this.location.back());
     }
-    this.location.back();
   }
 }
